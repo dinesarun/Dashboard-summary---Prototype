@@ -1,0 +1,240 @@
+/* HighRise Design System — Colors & Type
+ * Sourced from:
+ *   - HighRise AI 1.1 Handoff Figma (HighLevel) — visual language, brand violet
+ *   - GoHighLevel/ghl-ui @next (packages/highrise) — 29-family palette, type keys
+ * Primary typeface: Inter. Accents: Plus Jakarta Sans, Source Serif 4.
+ *
+ * Naming: `--brand-*` = HighLevel Violet (design-system brand color).
+ *         `--primary-*` = ghl-ui code-side "primary" semantic slot (blue).
+ *         `--purple-*` = same palette family as brand; purple-600 == brand-500.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&display=swap');
+
+:root {
+  /* ── Brand / HighLevel Violet ─────────────────────────────── */
+  --brand-50:  rgb(244, 243, 255);
+  --brand-100: rgb(235, 233, 254);
+  --brand-200: rgb(217, 214, 254);
+  --brand-300: rgb(189, 180, 254);
+  --brand-400: rgb(172, 160, 228);
+  --brand-500: rgb(105, 56, 239);   /* HighLevel Violet — primary action */
+  --brand-600: rgb(89, 37, 220);    /* deeper violet — hover/active */
+  --brand-700: rgb(69, 25, 185);
+  --brand-ink: rgb(25, 25, 52);     /* near-black violet for dark surfaces */
+
+  /* ── Neutrals (gray ramp, Untitled-UI lineage) ────────────── */
+  --gray-25:  rgb(252, 252, 253);
+  --gray-50:  rgb(249, 250, 251);
+  --gray-100: rgb(242, 244, 247);
+  --gray-200: rgb(234, 236, 240);
+  --gray-300: rgb(208, 213, 221);   /* default border */
+  --gray-400: rgb(152, 162, 179);
+  --gray-500: rgb(102, 112, 133);
+  --gray-600: rgb(71, 84, 103);
+  --gray-700: rgb(52, 64, 84);
+  --gray-800: rgb(29, 41, 57);
+  --gray-900: rgb(16, 24, 40);
+  --black:    rgb(0, 0, 0);
+  --white:    rgb(255, 255, 255);
+
+  /* ── Semantic ─────────────────────────────────────────────── */
+  --success-50:  rgb(236, 253, 243);
+  --success-100: rgb(209, 250, 223);
+  --success-600: rgb(3, 152, 85);
+  --warning-50:  rgb(255, 250, 235);
+  --warning-100: rgb(254, 240, 199);
+  --warning-600: rgb(220, 104, 3);
+  --error-50:    rgb(254, 243, 242);
+  --error-100:   rgb(254, 228, 226);
+  --error-600:   rgb(217, 45, 32);
+
+  /* ── Surfaces / Foreground (semantic) ─────────────────────── */
+  --bg:        var(--white);
+  --bg-muted:  var(--gray-50);
+  --bg-subtle: var(--gray-100);
+  --bg-inverse:var(--brand-ink);
+
+  --fg:        var(--gray-900);
+  --fg-muted:  var(--gray-600);
+  --fg-subtle: var(--gray-500);
+  --fg-placeholder: var(--gray-400);
+  --fg-inverse: var(--white);
+  --fg-brand:  var(--brand-500);
+
+  --border:       var(--gray-300);
+  --border-muted: var(--gray-200);
+  --border-focus: var(--brand-300);
+
+  /* ── Shadows (Untitled-UI scale, alpha on gray-900) ──────── */
+  --shadow-xs: 0 1px 2px 0 rgba(16,24,40,0.05);
+  --shadow-sm: 0 1px 2px 0 rgba(16,24,40,0.06), 0 1px 3px 0 rgba(16,24,40,0.10);
+  --shadow-md: 0 2px 4px -2px rgba(16,24,40,0.06), 0 4px 8px -2px rgba(16,24,40,0.10);
+  --shadow-lg: 0 4px 6px -2px rgba(16,24,40,0.03), 0 12px 16px -4px rgba(16,24,40,0.08);
+  --shadow-xl: 0 8px 8px -4px rgba(16,24,40,0.03), 0 20px 24px -4px rgba(16,24,40,0.08);
+  --shadow-focus-brand: 0 0 0 4px rgba(105,56,239,0.18);
+  --shadow-focus-error: 0 0 0 4px rgba(217,45,32,0.18);
+
+  /* ── Radii ───────────────────────────────────────────────── */
+  --radius-xs: 2px;
+  --radius-sm: 4px;   /* default control radius — buttons, inputs */
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-pill: 999px;
+
+  /* ── Spacing (4-pt base) ─────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ── Type families ───────────────────────────────────────── */
+  --font-sans:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  --font-serif:   'Source Serif 4', Georgia, serif;
+  --font-mono:    ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ── Type scale (from Figma usage) ───────────────────────── */
+  --fs-display-xl: 62px;   /* Plus Jakarta SemiBold — marketing hero */
+  --fs-display-lg: 48px;   /* page titles */
+  --fs-display-md: 36px;
+  --fs-h1: 28px;
+  --fs-h2: 21px;
+  --fs-h3: 18px;
+  --fs-body-lg: 16px;      /* default body / button */
+  --fs-body: 14px;
+  --fs-sm: 13px;
+  --fs-xs: 12px;
+  --fs-2xs: 11px;
+
+  --lh-tight: 1.0;
+  --lh-snug:  1.2;
+  --lh-normal:1.5;
+}
+
+/* ── Semantic text styles ────────────────────────────────── */
+.ds-display-xl { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-display-xl); line-height: var(--lh-tight); letter-spacing: -0.02em; color: var(--fg); }
+.ds-display-lg { font-family: var(--font-sans); font-weight: 500; font-size: var(--fs-display-lg); line-height: var(--lh-tight); letter-spacing: -0.02em; color: var(--fg); }
+.ds-display-md { font-family: var(--font-sans); font-weight: 500; font-size: var(--fs-display-md); line-height: var(--lh-tight); letter-spacing: -0.02em; color: var(--fg); }
+.ds-h1 { font-family: var(--font-sans); font-weight: 500; font-size: var(--fs-h1); line-height: var(--lh-snug); letter-spacing: -0.01em; color: var(--fg); }
+.ds-h2 { font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-h2); line-height: var(--lh-snug); color: var(--fg); }
+.ds-h3 { font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-h3); line-height: var(--lh-snug); color: var(--fg); }
+.ds-body-lg { font-family: var(--font-sans); font-weight: 400; font-size: var(--fs-body-lg); line-height: var(--lh-normal); color: var(--fg); }
+.ds-body { font-family: var(--font-sans); font-weight: 400; font-size: var(--fs-body); line-height: var(--lh-normal); color: var(--fg); }
+.ds-body-strong { font-family: var(--font-sans); font-weight: 700; font-size: var(--fs-body-lg); line-height: 24px; color: var(--fg); }
+.ds-label { font-family: var(--font-sans); font-weight: 500; font-size: var(--fs-body); line-height: 20px; color: var(--fg); }
+.ds-caption { font-family: var(--font-sans); font-weight: 400; font-size: var(--fs-xs); line-height: 18px; color: var(--fg-muted); }
+.ds-overline { font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-2xs); line-height: 16px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-subtle); }
+.ds-serif-quote { font-family: var(--font-serif); font-weight: 400; font-size: 20px; line-height: 1.45; font-style: italic; color: var(--fg); }
+
+/* utility text colors */
+.fg-brand { color: var(--fg-brand); }
+.fg-muted { color: var(--fg-muted); }
+.fg-subtle { color: var(--fg-subtle); }
+.fg-inverse { color: var(--fg-inverse); }
+
+/* ── Button base + variants (observed) ──────────────────── */
+.ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--font-sans); font-weight: 600; border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-xs); transition: background .12s, border-color .12s, color .12s, box-shadow .12s;
+  cursor: pointer; border: 1px solid transparent; }
+.ds-btn:focus-visible { outline: none; box-shadow: var(--shadow-focus-brand); }
+.ds-btn-xs { height: 28px; padding: 0 10px; font-size: 12px; }
+.ds-btn-sm { height: 32px; padding: 0 12px; font-size: 13px; }
+.ds-btn-md { height: 36px; padding: 0 14px; font-size: 14px; }
+.ds-btn-lg { height: 40px; padding: 0 16px; font-size: 14px; }
+.ds-btn-xl { height: 44px; padding: 0 18px; font-size: 16px; }
+.ds-btn-primary   { background: var(--brand-500); color: var(--white); border-color: var(--brand-500); }
+.ds-btn-primary:hover { background: var(--brand-600); border-color: var(--brand-600); }
+.ds-btn-secondary { background: var(--white); color: var(--gray-700); border-color: var(--gray-300); }
+.ds-btn-secondary:hover { background: var(--gray-50); }
+.ds-btn-tertiary  { background: transparent; color: var(--gray-600); border-color: transparent; box-shadow: none; }
+.ds-btn-tertiary:hover { background: var(--gray-100); color: var(--gray-700); }
+.ds-btn-ghost     { background: transparent; color: var(--brand-600); border-color: transparent; box-shadow: none; }
+.ds-btn-ghost:hover { background: var(--brand-50); }
+.ds-btn-link      { background: transparent; color: var(--brand-600); border-color: transparent; box-shadow: none; height: auto; padding: 0; }
+.ds-btn-link:hover { color: var(--brand-700); text-decoration: underline; }
+
+/* ── Input ───────────────────────────────────────────────── */
+.ds-input { width: 100%; height: 40px; padding: 8px 12px; background: var(--white);
+  border: 1px solid var(--border); border-radius: var(--radius-sm); font: 400 14px/20px var(--font-sans); color: var(--fg); box-shadow: var(--shadow-xs); }
+.ds-input::placeholder { color: var(--fg-placeholder); }
+.ds-input:focus { outline: none; border-color: var(--border-focus); box-shadow: var(--shadow-focus-brand); }
+.ds-input[aria-invalid="true"] { border-color: var(--error-600); }
+
+/* ─────────────────────────────────────────────────────────────
+ * GHL-UI FULL PALETTE
+ * ─────────────────────────────────────────────────────────────
+ * Ported verbatim from packages/highrise/src/tailwindcss/colorValues.js
+ * 29 color families × 11 shades (25, 50, 100..900).
+ * Use these when you need a specific palette shade. The existing
+ * --brand-* / --gray-* / --success-* / etc. above are aliases of
+ * these (purple-600, gray-xx, success-xx, warning-xx, error-xx)
+ * and remain the canonical semantic names for component styling.
+ */
+:root {
+  /* primary (ghl-ui "primary" = blue; NOT the HighLevel brand violet) */
+  --primary-25: #f5f8ff; --primary-50: #eff4ff; --primary-100: #d1e0ff; --primary-200: #b2ccff; --primary-300: #84adff; --primary-400: #528bff; --primary-500: #2970ff; --primary-600: #155eef; --primary-700: #004eeb; --primary-800: #0040c1; --primary-900: #00359e;
+  /* purple — HighLevel Violet lives here (purple-600) */
+  --purple-25: #fafaff; --purple-50: #f4f3ff; --purple-100: #ebe9fe; --purple-200: #d9d6fe; --purple-300: #bdb4fe; --purple-400: #9b8afb; --purple-500: #7a5af8; --purple-600: #6938ef; --purple-700: #5925dc; --purple-800: #4a1fb8; --purple-900: #3e1c96;
+  --violet-25: #fbfaff; --violet-50: #f5f3ff; --violet-100: #ece9fe; --violet-200: #ddd6fe; --violet-300: #c3b5fd; --violet-400: #a48afb; --violet-500: #875bf7; --violet-600: #7839ee; --violet-700: #6927da; --violet-800: #5720b7; --violet-900: #491c96;
+  --indigo-25: #f5f8ff; --indigo-50: #eef4ff; --indigo-100: #e0eaff; --indigo-200: #c7d7fe; --indigo-300: #a4bcfd; --indigo-400: #8098f9; --indigo-500: #6172f3; --indigo-600: #444ce7; --indigo-700: #3538cd; --indigo-800: #2d31a6; --indigo-900: #2d3282;
+  --blue-25: #f5faff; --blue-50: #eff8ff; --blue-100: #d1e9ff; --blue-200: #b2ddff; --blue-300: #84caff; --blue-400: #53b1fd; --blue-500: #2e90fa; --blue-600: #1570ef; --blue-700: #175cd3; --blue-800: #1849a9; --blue-900: #194185;
+  --blue-light-25: #f5fbff; --blue-light-50: #f0f9ff; --blue-light-100: #e0f2fe; --blue-light-200: #b9e6fe; --blue-light-300: #7cd4fd; --blue-light-400: #36bffa; --blue-light-500: #0ba5ec; --blue-light-600: #0086c9; --blue-light-700: #026aa2; --blue-light-800: #065986; --blue-light-900: #0b4a6f;
+  --blue-dark-25: #f5f8ff; --blue-dark-50: #eff4ff; --blue-dark-100: #d1e0ff; --blue-dark-200: #b2ccff; --blue-dark-300: #84adff; --blue-dark-400: #528bff; --blue-dark-500: #2970ff; --blue-dark-600: #155eef; --blue-dark-700: #004eeb; --blue-dark-800: #0040c1; --blue-dark-900: #00359e;
+  --cyan-25: #f5feff; --cyan-50: #ecfdff; --cyan-100: #cff9fe; --cyan-200: #a5f0fc; --cyan-300: #67e3f9; --cyan-400: #22ccee; --cyan-500: #06aed4; --cyan-600: #088ab2; --cyan-700: #0e7090; --cyan-800: #155b75; --cyan-900: #164c63;
+  --teal-25: #f6fefc; --teal-50: #f0fdf9; --teal-100: #ccfbef; --teal-200: #99f6e0; --teal-300: #5fe9d0; --teal-400: #2ed3b7; --teal-500: #15b79e; --teal-600: #0e9384; --teal-700: #107569; --teal-800: #125d56; --teal-900: #134e48;
+  --green-25: #f6fef9; --green-50: #edfcf2; --green-100: #d3f8df; --green-200: #aaf0c4; --green-300: #73e2a3; --green-400: #3ccb7f; --green-500: #16b364; --green-600: #099250; --green-700: #087443; --green-800: #095c37; --green-900: #084c2e;
+  --green-light-25: #fafef5; --green-light-50: #f3fee7; --green-light-100: #e3fbcc; --green-light-200: #d0f8ab; --green-light-300: #a6ef67; --green-light-400: #85e13a; --green-light-500: #66c61c; --green-light-600: #4ca30d; --green-light-700: #3b7c0f; --green-light-800: #326212; --green-light-900: #2b5314;
+  --moss-25: #fafdf7; --moss-50: #f5fbee; --moss-100: #e6f4d7; --moss-200: #ceeab0; --moss-300: #acdc79; --moss-400: #86cb3c; --moss-500: #669f2a; --moss-600: #4f7a21; --moss-700: #3f621a; --moss-800: #335015; --moss-900: #2b4212;
+  --yellow-25: #fefdf0; --yellow-50: #fefbe8; --yellow-100: #fef7c3; --yellow-200: #feee95; --yellow-300: #fde272; --yellow-400: #fac515; --yellow-500: #eaaa08; --yellow-600: #ca8504; --yellow-700: #a15c07; --yellow-800: #854a0e; --yellow-900: #713b12;
+  --orange-25: #fefaf5; --orange-50: #fef6ee; --orange-100: #fdead7; --orange-200: #f9dbaf; --orange-300: #f7b27a; --orange-400: #f38744; --orange-500: #ef6820; --orange-600: #e04f16; --orange-700: #b93815; --orange-800: #932f19; --orange-900: #772917;
+  --orange-dark-25: #fff9f5; --orange-dark-50: #fff4ed; --orange-dark-100: #ffe6d5; --orange-dark-200: #ffd6ae; --orange-dark-300: #ff9c66; --orange-dark-400: #ff692e; --orange-dark-500: #ff4405; --orange-dark-600: #e62e05; --orange-dark-700: #bc1b06; --orange-dark-800: #97180c; --orange-dark-900: #771a0d;
+  --pink-25: #fef6fb; --pink-50: #fdf2fa; --pink-100: #fce7f6; --pink-200: #fcceee; --pink-300: #faa7e0; --pink-400: #f670c7; --pink-500: #ee46bc; --pink-600: #dd2590; --pink-700: #c11574; --pink-800: #9e165f; --pink-900: #851651;
+  --rose-25: #fff5f6; --rose-50: #fff1f3; --rose-100: #ffe4e8; --rose-200: #fecdd6; --rose-300: #fea3b4; --rose-400: #fd6f8e; --rose-500: #f63d68; --rose-600: #e31b54; --rose-700: #c01048; --rose-800: #a11043; --rose-900: #89123e;
+  --fuchsia-25: #fefaff; --fuchsia-50: #fdf4ff; --fuchsia-100: #fbe8ff; --fuchsia-200: #f6d0fe; --fuchsia-300: #eeaafd; --fuchsia-400: #e478fa; --fuchsia-500: #d444f1; --fuchsia-600: #ba24d5; --fuchsia-700: #9f1ab1; --fuchsia-800: #821890; --fuchsia-900: #6f1877;
+  /* gray families — 7 variants, all with identical structure */
+  --gray-blue-25: #fcfcfd; --gray-blue-50: #f8f9fc; --gray-blue-100: #eaecf5; --gray-blue-200: #d5d9eb; --gray-blue-300: #b3b8db; --gray-blue-400: #717bbc; --gray-blue-500: #4e5ba6; --gray-blue-600: #3e4784; --gray-blue-700: #363f72; --gray-blue-800: #293056; --gray-blue-900: #101323;
+  --gray-cool-25: #fcfcfd; --gray-cool-50: #f9f9fb; --gray-cool-100: #eff1f5; --gray-cool-200: #dcdfea; --gray-cool-300: #b9c0d4; --gray-cool-400: #7d89b0; --gray-cool-500: #5d6b98; --gray-cool-600: #4a5578; --gray-cool-700: #404968; --gray-cool-800: #30374f; --gray-cool-900: #111322;
+  --gray-modern-25: #fcfcfd; --gray-modern-50: #f8fafc; --gray-modern-100: #eef2f6; --gray-modern-200: #e3e8ef; --gray-modern-300: #cdd5df; --gray-modern-400: #9aa4b2; --gray-modern-500: #697586; --gray-modern-600: #4b5565; --gray-modern-700: #364152; --gray-modern-800: #202939; --gray-modern-900: #121926;
+  --gray-neutral-25: #fcfcfd; --gray-neutral-50: #f9fafb; --gray-neutral-100: #f3f4f6; --gray-neutral-200: #e5e7eb; --gray-neutral-300: #d2d6db; --gray-neutral-400: #9da4ae; --gray-neutral-500: #6c737f; --gray-neutral-600: #4d5761; --gray-neutral-700: #384250; --gray-neutral-800: #1f2a37; --gray-neutral-900: #111927;
+  --gray-iron-25: #fcfcfc; --gray-iron-50: #fafafa; --gray-iron-100: #f4f4f5; --gray-iron-200: #e4e4e7; --gray-iron-300: #d1d1d6; --gray-iron-400: #a0a0ab; --gray-iron-500: #70707b; --gray-iron-600: #51525c; --gray-iron-700: #3f3f46; --gray-iron-800: #26272b; --gray-iron-900: #18181b;
+  --gray-true-25: #fcfcfc; --gray-true-50: #fafafa; --gray-true-100: #f5f5f5; --gray-true-200: #e5e5e5; --gray-true-300: #d6d6d6; --gray-true-400: #a3a3a3; --gray-true-500: #737373; --gray-true-600: #525252; --gray-true-700: #424242; --gray-true-800: #292929; --gray-true-900: #141414;
+  --gray-warm-25: #fdfdfc; --gray-warm-50: #fafaf9; --gray-warm-100: #f5f5f4; --gray-warm-200: #e7e5e4; --gray-warm-300: #d7d3d0; --gray-warm-400: #a9a29d; --gray-warm-500: #79716b; --gray-warm-600: #57534e; --gray-warm-700: #44403c; --gray-warm-800: #292524; --gray-warm-900: #1c1917;
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * GHL-UI TYPE SCALE (TailwindCSS keys)
+ * ─────────────────────────────────────────────────────────────
+ * From packages/highrise/src/tailwindcss/font.js
+ * Only four weights exist in the code: regular(400), medium(500),
+ * semibold(600), bold(700). Each entry below is [font-size, line-height].
+ */
+.text-4xs { font-size: 8px;  line-height: 12px; }
+.text-3xs { font-size: 9px;  line-height: 14px; }
+.text-2xs { font-size: 10px; line-height: 15px; }
+.text-xs  { font-size: 11px; line-height: 16px; }
+.text-sm  { font-size: 12px; line-height: 17px; }
+.text-md  { font-size: 13px; line-height: 18px; }
+.text-lg  { font-size: 14px; line-height: 20px; }
+.text-xl  { font-size: 15px; line-height: 20px; }
+.text-2xl { font-size: 16px; line-height: 24px; }
+.text-3xl { font-size: 18px; line-height: 28px; }
+.text-4xl { font-size: 20px; line-height: 30px; }
+.text-display-xs { font-size: 24px; line-height: 32px; }
+.text-display-sm { font-size: 30px; line-height: 38px; }
+.text-display-md { font-size: 36px; line-height: 44px; }
+.text-display-lg { font-size: 48px; line-height: 60px; }
+
+.font-regular  { font-weight: 400; }
+.font-medium   { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold     { font-weight: 700; }
