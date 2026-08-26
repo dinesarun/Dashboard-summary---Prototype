@@ -77,6 +77,11 @@ type State = {
   insightsDismissed: boolean;
   dismissInsights: () => void;
 
+  // Text the user selected + "dig deeper" on — seeded into the Ask AI thread.
+  askSeed: string | null;
+  openAskWithSeed: (seed: string) => void;
+  clearAskSeed: () => void;
+
   filters: DashboardFilters;
   setDateRange: (preset: string, from: string, to: string, comparison: string) => void;
   setQuickFilter: (key: QuickFilterKey, value: string | null) => void;
@@ -164,6 +169,7 @@ export const useDemoStore = create<State>((set, get) => {
     addWidgetOpen: false,
     editDrawerOpen: false,
     insightsDismissed: readDismissed(),
+    askSeed: null,
     filters: defaultFilters(),
 
     dashboard,
@@ -181,7 +187,9 @@ export const useDemoStore = create<State>((set, get) => {
       syncLegacy();
     },
     setEditMode: (editMode) => set({ editMode }),
-    openAskPanel: () => set({ askPanelOpen: true }),
+    openAskPanel: () => set({ askPanelOpen: true, askSeed: null }),
+    openAskWithSeed: (seed) => set({ askPanelOpen: true, askSeed: seed }),
+    clearAskSeed: () => set({ askSeed: null }),
     closeAskPanel: () => set({ askPanelOpen: false }),
     openAskExpanded: () => set({ askExpandedOpen: true, askPanelOpen: false }),
     closeAskExpanded: () => set({ askExpandedOpen: false }),

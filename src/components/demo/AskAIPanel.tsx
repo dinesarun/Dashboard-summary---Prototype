@@ -17,8 +17,16 @@ import { motion } from "framer-motion";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export function AskAIPanel() {
-  const { askPanelOpen, closeAskPanel, saveAsWidget, openAskExpanded, widgetExists, view } =
-    useDemoStore();
+  const {
+    askPanelOpen,
+    closeAskPanel,
+    saveAsWidget,
+    openAskExpanded,
+    widgetExists,
+    view,
+    askSeed,
+    clearAskSeed,
+  } = useDemoStore();
   const surfaceLabel = view === "report" ? "report" : "dashboard";
   const [streamed, setStreamed] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -48,16 +56,33 @@ export function AskAIPanel() {
 
   const done = !loading && streamed >= MOCK_SUMMARY.length;
 
-  const ask = (q: string) => {
+  const ask = (q: string, customAnswer?: string) => {
     if (!q.trim()) return;
     setAsking(true);
     setInput("");
     setTimeout(() => {
-      setThread((t) => [...t, { q, a: CANNED_ANSWERS[q] ?? CANNED_ANSWERS.default }]);
+      setThread((t) => [
+        ...t,
+        { q, a: customAnswer ?? CANNED_ANSWERS[q] ?? CANNED_ANSWERS.default },
+      ]);
       setAsking(false);
       requestAnimationFrame(() => bottomRef.current?.scrollIntoView({ behavior: "smooth" }));
     }, 700);
   };
+
+  // Seed a "dig deeper" question from text the user highlighted in the widget.
+  const seedConsumed = useRef(false);
+  useEffect(() => {
+    if (!askPanelOpen) seedConsumed.current = false;
+  }, [askPanelOpen]);
+  useEffect(() => {
+    if (done && askSeed && !seedConsumed.current) {
+      seedConsumed.current = true;
+      ask(askSeed, digDeeperAnswer(askSeed));
+      clearAskSeed();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [done, askSeed]);
 
   return (
     <Sheet open={askPanelOpen} onOpenChange={(o) => !o && closeAskPanel()}>
@@ -194,6 +219,23 @@ export function AskAIPanel() {
       </SheetContent>
     </Sheet>
   );
+}
+
+// Produce a contextual "dig deeper" answer for the text the user highlighted.
+function digDeeperAnswer(selection: string): string {
+  const s = selection.toLowerCase();
+  if (s.includes("no-show") || s.includes("no show"))
+    return "Digging into no-shows: 12 of 47 booked (25.5%) didn't show — 8 came from this morning's block. The common thread is a 24h+ gap between booking and appointment with no SMS reminder. Turning on a 2-hour reminder on that calendar has historically cut no-shows by ~30%.";
+  if (s.includes("proposal") || s.includes("stalled") || s.includes("pipeline"))
+    return "Digging into the pipeline: $148K sits in Proposal and 6 deals have had no activity for 7+ days — 4 are with the same rep. A nudge sequence on deals idle >5 days typically recovers ~20% within a week.";
+  if (s.includes("opportunit") || s.includes("facebook") || s.includes("lead ads"))
+    return "Digging into opportunities: 32 new this week (+18% WoW), 41% from Facebook Lead Ads. Lead→Qualified is healthy at 64%, but Proposal→Won is only 18% — the drop-off is at proposal, not top-of-funnel.";
+  if (s.includes("open rate") || s.includes("email") || s.includes("subject"))
+    return "Digging into email: open rate fell to 22% (was 28%). The dip is concentrated in the weekly digest send; 'Onboarding Day 3' still replies at 41%. A subject-line A/B on the digest is the highest-leverage fix.";
+  if (s.includes("call") || s.includes("voicemail") || s.includes("talk time"))
+    return "Digging into calls: avg talk time is 4m 12s, and calls over 6 min close at 2.3× the rate. 9 voicemails were left with no follow-up SMS — wiring an automation there could recover several conversations.";
+  const trimmed = selection.length > 90 ? selection.slice(0, 90) + "…" : selection;
+  return `Here's a closer look at "${trimmed}": the pattern holds across the last 30 days, with the sharpest movement in the most recent week. Want me to break it down by source or by rep?`;
 }
 
 function FollowUps({

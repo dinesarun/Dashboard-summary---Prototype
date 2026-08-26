@@ -8,8 +8,7 @@ export const TODAYS_INSIGHTS =
   "32 new opportunities came in today (+18% vs. yesterday) with $148K sitting in Proposal — 6 deals have stalled over 7 days. Your no-show rate climbed to 25.5%, mostly from this morning's appointment block.";
 
 export function TodaysInsights() {
-  const { openAskPanel, insightsDismissed, dismissInsights, widgetExists } =
-    useDemoStore();
+  const { openAskPanel, insightsDismissed, dismissInsights, widgetExists } = useDemoStore();
 
   if (insightsDismissed || widgetExists) return null;
 
@@ -35,9 +34,7 @@ export function TodaysInsights() {
         <div className="flex gap-2.5">
           <SparkleIcon className="mt-0.5 shrink-0" />
           <div>
-            <h2 className="text-sm font-semibold leading-none">
-              Today&apos;s insights
-            </h2>
+            <h2 className="text-sm font-semibold leading-none">Today&apos;s insights</h2>
             <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed max-w-3xl">
               {TODAYS_INSIGHTS}
             </p>
@@ -50,7 +47,7 @@ export function TodaysInsights() {
           onClick={openAskPanel}
           className="shrink-0 gap-1.5 border-[color:var(--ai-accent)]/30 text-[color:var(--ai-accent)] hover:bg-[color:var(--ai-accent-soft)]"
         >
-          Dig deeper
+          View full summary
           <ArrowRight className="h-4 w-4" />
         </Button>
       </div>

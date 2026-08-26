@@ -152,6 +152,7 @@ export function SummaryWidget() {
     deleteWidget,
     openEditDrawer,
     openAskPanel,
+    openAskWithSeed,
     highlightWidget,
     resetSettings,
     lastUpdated,
@@ -170,7 +171,11 @@ export function SummaryWidget() {
   }, []);
 
   const contentRef = useRef<HTMLDivElement>(null);
-  const [digDeeper, setDigDeeper] = useState<{ top: number; left: number } | null>(null);
+  const [digDeeper, setDigDeeper] = useState<{
+    top: number;
+    left: number;
+    text: string;
+  } | null>(null);
 
   // Show "Dig deeper" next to selected text inside the widget content
   useEffect(() => {
@@ -186,11 +191,17 @@ export function SummaryWidget() {
         setDigDeeper(null);
         return;
       }
+      const text = sel.toString().trim();
+      if (!text) {
+        setDigDeeper(null);
+        return;
+      }
       const rect = range.getBoundingClientRect();
       const cRect = container.getBoundingClientRect();
       setDigDeeper({
         top: rect.top - cRect.top - 34,
         left: Math.max(0, rect.left - cRect.left + rect.width / 2 - 50),
+        text,
       });
     };
     document.addEventListener("selectionchange", onSelect);
@@ -324,8 +335,9 @@ export function SummaryWidget() {
                 style={{ top: digDeeper.top, left: digDeeper.left }}
                 onMouseDown={(e) => {
                   e.preventDefault();
-                  openAskPanel();
+                  openAskWithSeed(digDeeper.text);
                   setDigDeeper(null);
+                  window.getSelection()?.removeAllRanges();
                 }}
               >
                 <SparkleIcon className="!h-3 !w-3" />
