@@ -53,10 +53,14 @@ export const activeFilterCount = (f: DashboardFilters): number => {
 };
 
 type Settings = {
+  title: string;
   granularity: Granularity;
   cadence: Cadence;
   instructions: string;
 };
+
+export const DASHBOARD_TITLE = "Summary of 'Sales overview' dashboard";
+export const REPORT_TITLE = "Summary of 'General Widgets' report";
 
 type Surface = {
   exists: boolean;
@@ -124,6 +128,7 @@ const blankSurface = (): Surface => ({
   isGenerating: false,
   highlight: false,
   settings: {
+    title: DASHBOARD_TITLE,
     granularity: "module",
     cadence: "",
     instructions: DEFAULT_INSTRUCTIONS,
@@ -159,6 +164,7 @@ export const useDemoStore = create<State>((set, get) => {
   dashboard.settings.cadence = "live"; // dashboards default to live auto-refresh
   const report = blankSurface();
   report.settings.granularity = "page";
+  report.settings.title = REPORT_TITLE;
 
   return {
     role: "editor",
@@ -245,7 +251,10 @@ export const useDemoStore = create<State>((set, get) => {
     updateSettings: (s) => patchActive({ settings: { ...get()[active()].settings, ...s } }),
     resetSettings: () => {
       const fresh = blankSurface().settings;
-      if (active() === "report") fresh.granularity = "page";
+      if (active() === "report") {
+        fresh.granularity = "page";
+        fresh.title = REPORT_TITLE;
+      }
       patchActive({ settings: fresh });
     },
   };

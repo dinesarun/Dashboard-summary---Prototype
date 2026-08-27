@@ -47,7 +47,7 @@ function timeAgo(d: Date | null) {
 export function ReportSummaryWidget() {
   const {
     role,
-    
+
     deleteWidget,
     openEditDrawer,
     openAskPanel,
@@ -72,9 +72,7 @@ export function ReportSummaryWidget() {
       animate={{
         opacity: 1,
         y: 0,
-        boxShadow: highlight
-          ? "0 0 0 3px oklch(0.62 0.20 295 / 0.35)"
-          : "0 0 0 0 transparent",
+        boxShadow: highlight ? "0 0 0 3px oklch(0.62 0.20 295 / 0.35)" : "0 0 0 0 transparent",
       }}
       transition={{ duration: 0.4 }}
       className="rounded-xl"
@@ -86,8 +84,11 @@ export function ReportSummaryWidget() {
         >
           <div className="flex items-center gap-2.5">
             <SparkleIcon />
-            <div className="text-[11px] text-muted-foreground">
-              Updated {timeAgo(lastUpdated)}
+            <div className="leading-tight">
+              <div className="text-sm font-semibold text-foreground">{settings.title}</div>
+              <div className="text-[11px] text-muted-foreground">
+                Updated {timeAgo(lastUpdated)}
+              </div>
             </div>
           </div>
 
@@ -137,8 +138,8 @@ export function ReportSummaryWidget() {
             <div>
               <div className="text-sm font-medium">Summary locked for your role</div>
               <p className="text-xs text-muted-foreground max-w-sm mx-auto mt-1">
-                You can't see the summary saved by another user, but you can generate your own
-                from the data you have access to.
+                You can't see the summary saved by another user, but you can generate your own from
+                the data you have access to.
               </p>
             </div>
             <Button size="sm" onClick={openAskPanel} className="gap-2">
@@ -148,8 +149,6 @@ export function ReportSummaryWidget() {
           </div>
         ) : (
           <div className="p-4 space-y-3">
-
-
             {isGenerating ? (
               <div className="space-y-2">
                 <Skeleton className="h-4 w-1/3" />
@@ -162,10 +161,7 @@ export function ReportSummaryWidget() {
               <ul className="divide-y">
                 {MOCK_REPORT_SUMMARY.map((p, idx) => {
                   const open = openPage === p.pageId;
-                  const bulletCount = p.modules.reduce(
-                    (n, m) => n + m.bullets.length,
-                    0,
-                  );
+                  const bulletCount = p.modules.reduce((n, m) => n + m.bullets.length, 0);
                   return (
                     <li key={p.pageId} className="py-1">
                       <button
@@ -179,9 +175,7 @@ export function ReportSummaryWidget() {
                             {bulletCount}
                           </Badge>
                         </span>
-                        <ChevronDown
-                          className={`h-4 w-4 transition ${open ? "rotate-180" : ""}`}
-                        />
+                        <ChevronDown className={`h-4 w-4 transition ${open ? "rotate-180" : ""}`} />
                       </button>
                       <AnimatePresence initial={false}>
                         {open && (
@@ -233,16 +227,15 @@ export function ReportSummaryWidget() {
               </ul>
             ) : (
               <ul className="text-sm space-y-1.5 pl-4 text-muted-foreground">
-                {MOCK_REPORT_SUMMARY.flatMap((p) =>
-                  p.modules.flatMap((m) => m.bullets),
-                ).map((b, i) => (
-                  <li key={i} className="list-disc">
-                    {b}
-                  </li>
-                ))}
+                {MOCK_REPORT_SUMMARY.flatMap((p) => p.modules.flatMap((m) => m.bullets)).map(
+                  (b, i) => (
+                    <li key={i} className="list-disc">
+                      {b}
+                    </li>
+                  ),
+                )}
               </ul>
             )}
-
           </div>
         )}
       </Card>

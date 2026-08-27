@@ -1,6 +1,7 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useDemoStore, type Cadence, type Granularity } from "@/lib/demo-store";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { FileText, RefreshCw, Sparkles } from "lucide-react";
+import { FileText, RefreshCw, Sparkles, Type } from "lucide-react";
 
 export function EditSummaryDrawer() {
   const { editDrawerOpen, closeEditDrawer, settings, updateSettings, view } = useDemoStore();
@@ -36,6 +37,18 @@ export function EditSummaryDrawer() {
         </SheetHeader>
 
         <div className="mt-5 space-y-5">
+          <div className="space-y-2">
+            <Label className="flex items-center gap-1.5">
+              <Type className="h-3.5 w-3.5 text-muted-foreground" />
+              Title
+            </Label>
+            <Input
+              value={local.title}
+              onChange={(e) => setLocal({ ...local, title: e.target.value })}
+              placeholder="e.g. Summary of 'Sales overview' dashboard"
+            />
+          </div>
+
           <div className="space-y-2">
             <Label className="flex items-center gap-1.5">
               <FileText className="h-3.5 w-3.5 text-muted-foreground" />

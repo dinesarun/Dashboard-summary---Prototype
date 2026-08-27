@@ -241,9 +241,7 @@ export function SummaryWidget() {
           <div className="flex items-center gap-2.5">
             <SparkleIcon />
             <div className="leading-tight">
-              <div className="text-sm font-semibold text-foreground">
-                Summary of 'Sales overview' dashboard
-              </div>
+              <div className="text-sm font-semibold text-foreground">{settings.title}</div>
               <div className="text-[11px] text-muted-foreground">
                 Last updated · {relativeTime(lastUpdated)}
               </div>

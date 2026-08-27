@@ -153,6 +153,7 @@ export function AskAIPanel() {
                     onSave={saveAsWidget}
                     widgetExists={widgetExists}
                     view={view}
+                    showSave
                   />
                 )}
               </div>
@@ -165,7 +166,7 @@ export function AskAIPanel() {
               <Bubble role="ai">
                 <div className="space-y-3">
                   <p className="text-sm">{t.a}</p>
-                  {/* follow-ups repeat after every regenerated summary */}
+                  {/* follow-ups repeat, but the save/add-to-dashboard CTA stays on the initial summary only */}
                   <FollowUps
                     ask={ask}
                     onSave={saveAsWidget}
@@ -243,11 +244,13 @@ function FollowUps({
   onSave,
   widgetExists,
   view,
+  showSave = false,
 }: {
   ask: (v: string) => void;
   onSave: () => void;
   widgetExists: boolean;
   view: string;
+  showSave?: boolean;
 }) {
   return (
     <motion.div
@@ -285,18 +288,20 @@ function FollowUps({
         </div>
       </div>
 
-      <div className="border-t pt-3">
-        {!widgetExists ? (
-          <Button onClick={onSave} className="w-full gap-2">
-            <Save className="h-4 w-4" />{" "}
-            {view === "report" ? "Add to report" : "Add summary to dashboard"}
-          </Button>
-        ) : (
-          <Button onClick={onSave} variant="outline" className="w-full gap-2">
-            <RefreshCw className="h-4 w-4" /> Update summary
-          </Button>
-        )}
-      </div>
+      {showSave && (
+        <div className="border-t pt-3">
+          {!widgetExists ? (
+            <Button onClick={onSave} className="w-full gap-2">
+              <Save className="h-4 w-4" />{" "}
+              {view === "report" ? "Add to report" : "Add summary to dashboard"}
+            </Button>
+          ) : (
+            <Button onClick={onSave} variant="outline" className="w-full gap-2">
+              <RefreshCw className="h-4 w-4" /> Update summary
+            </Button>
+          )}
+        </div>
+      )}
     </motion.div>
   );
 }
