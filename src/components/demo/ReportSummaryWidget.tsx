@@ -37,11 +37,15 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 function timeAgo(d: Date | null) {
   if (!d) return "just now";
-  const s = Math.floor((Date.now() - d.getTime()) / 1000);
-  if (s < 5) return "just now";
-  if (s < 60) return `${s}s ago`;
-  if (s < 3600) return `${Math.floor(s / 60)}m ago`;
-  return `${Math.floor(s / 3600)}h ago`;
+  const secs = Math.max(0, Math.floor((Date.now() - d.getTime()) / 1000));
+  if (secs < 10) return "just now";
+  if (secs < 60) return `${secs} secs ago`;
+  const mins = Math.floor(secs / 60);
+  if (mins < 60) return `${mins} min${mins > 1 ? "s" : ""} ago`;
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return `${hrs} hr${hrs > 1 ? "s" : ""} ago`;
+  const days = Math.floor(hrs / 24);
+  return `${days} day${days > 1 ? "s" : ""} ago`;
 }
 
 export function ReportSummaryWidget() {
@@ -87,7 +91,7 @@ export function ReportSummaryWidget() {
             <div className="leading-tight">
               <div className="text-sm font-semibold text-foreground">{settings.title}</div>
               <div className="text-[11px] text-muted-foreground">
-                Updated {timeAgo(lastUpdated)}
+                Last updated · {timeAgo(lastUpdated)}
               </div>
             </div>
           </div>
@@ -100,7 +104,7 @@ export function ReportSummaryWidget() {
                 className="h-8 w-8"
                 onClick={openAskPanel}
                 disabled={isGenerating}
-                title="Refresh summary in Ask AI"
+                title="Update via Ask AI"
               >
                 <RefreshCw className={`h-4 w-4 ${isGenerating ? "animate-spin" : ""}`} />
               </Button>
@@ -112,7 +116,7 @@ export function ReportSummaryWidget() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem onClick={openAskPanel}>
-                    <RefreshCw className="h-4 w-4 mr-2" /> Refresh in Ask AI
+                    <RefreshCw className="h-4 w-4 mr-2" /> Update via Ask AI
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={openEditDrawer}>
                     <Pencil className="h-4 w-4 mr-2" /> Edit

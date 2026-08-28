@@ -55,7 +55,7 @@ function Index() {
                 className="flex items-center justify-between rounded-md border-2 border-dashed border-foreground/40 bg-background px-3 py-2"
               >
                 <span className="text-xs text-muted-foreground">
-                  Edit mode — drag widgets to rearrange (mocked).
+                  Edit mode — drag widgets to rearrange.
                 </span>
                 <Button size="sm" onClick={openAddWidget} className="gap-1.5">
                   <Plus className="h-4 w-4" /> Add widget

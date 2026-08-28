@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -102,7 +101,7 @@ function FilterBadge() {
         </Button>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-72">
-        <div className="text-sm font-semibold">Reflecting dashboard filters</div>
+        <div className="text-sm font-semibold">Reflects the dashboard's filters</div>
         <p className="mt-1 text-xs text-muted-foreground">
           This summary updates to match the dashboard's date range and quick filters.
         </p>
@@ -296,14 +295,14 @@ export function SummaryWidget() {
                     <Pencil className="h-4 w-4 mr-2" /> Customize summary
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={resetSettings}>
-                    <RotateCcw className="h-4 w-4 mr-2" /> Reset to default format
+                    <RotateCcw className="h-4 w-4 mr-2" /> Reset to defaults
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() =>
                       navigate({ to: "/ask-ai", search: { thread: ACTIVE_THREAD_ID } })
                     }
                   >
-                    <MessageSquare className="h-4 w-4 mr-2" /> Go to Ask AI chat
+                    <MessageSquare className="h-4 w-4 mr-2" /> Open Ask AI chat
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
@@ -408,25 +407,22 @@ export function SummaryWidget() {
                   )}
                 </>
               ) : (
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {(expanded ? MOCK_SUMMARY : MOCK_SUMMARY.slice(0, 2)).map((m) => (
-                    <div key={m.key} className="rounded-lg border bg-muted/20 p-3">
-                      <div className="flex items-center gap-2 text-sm font-medium mb-1.5">
-                        <span>{m.emoji}</span>
-                        {m.label}
-                        <Badge variant="secondary" className="text-[10px]">
-                          {m.bullets.length}
-                        </Badge>
+                <div className="space-y-1.5 text-sm text-muted-foreground">
+                  {(expanded ? MOCK_SUMMARY : MOCK_SUMMARY.slice(0, 2)).flatMap((m) =>
+                    m.bullets.map((b, i) => (
+                      <div key={`${m.key}-${i}`} className="flex gap-2 leading-relaxed">
+                        <span className="w-4 shrink-0 select-none text-center">
+                          {i === 0 ? m.emoji : "•"}
+                        </span>
+                        <span>
+                          {i === 0 && (
+                            <span className="font-semibold text-foreground">{m.label}: </span>
+                          )}
+                          {b}
+                        </span>
                       </div>
-                      <ul className="space-y-1.5 pl-5 text-sm text-muted-foreground">
-                        {m.bullets.map((b, i) => (
-                          <li key={i} className="list-disc">
-                            {b}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+                    )),
+                  )}
                 </div>
               )}
             </div>
@@ -435,7 +431,7 @@ export function SummaryWidget() {
               className="text-xs font-medium text-[color:var(--ai-accent)] hover:underline"
               onClick={() => setExpanded((e) => !e)}
             >
-              {expanded ? "Show less" : `Show more (${MOCK_SUMMARY.length - 2} more modules)`}
+              {expanded ? "Show less" : "Show all modules"}
             </button>
           </div>
         )}

@@ -94,7 +94,7 @@ export function AskAIExpandedDialog() {
           <div className="border-t p-3 space-y-2">
             {widgetExists && (
               <Button onClick={saveAsWidget} variant="outline" size="sm" className="w-full">
-                Update existing summary widget
+                Update summary
               </Button>
             )}
             <div className="flex gap-2">

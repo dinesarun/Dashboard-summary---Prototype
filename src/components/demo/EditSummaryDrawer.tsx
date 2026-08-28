@@ -79,7 +79,7 @@ export function EditSummaryDrawer() {
             <p className="text-[11px] text-muted-foreground">
               {isReport
                 ? "Page = one section per report page. Module = grouped by product area. Widget = one bullet per widget."
-                : "Text based = module-grouped narrative. Visual based = top 3 visual insight cards."}
+                : "Text based = module-grouped narrative. Visual based = per-module cards with metric + comparison bars."}
             </p>
           </div>
 
@@ -118,7 +118,7 @@ export function EditSummaryDrawer() {
           <div className="space-y-2">
             <Label className="flex items-center gap-1.5">
               <Sparkles className="h-3.5 w-3.5 text-[color:var(--ai-accent)]" />
-              Instructions for the Ask AI
+              Instructions for Ask AI
             </Label>
             <Textarea
               rows={6}
@@ -127,7 +127,7 @@ export function EditSummaryDrawer() {
               placeholder="e.g. Focus on pipeline health and at-risk deals. Flag any module where volume dropped >20% week over week. Keep each bullet under 20 words."
             />
             <p className="text-[11px] text-muted-foreground">
-              The LLM uses these instructions every time it generates or refreshes this summary.
+              Ask AI uses these instructions every time it generates or refreshes this summary.
             </p>
           </div>
 
@@ -139,7 +139,7 @@ export function EditSummaryDrawer() {
               onClick={() => {
                 updateSettings(local);
                 closeEditDrawer();
-                toast.success("Summary widget updated");
+                toast.success("Summary updated");
               }}
             >
               Apply changes

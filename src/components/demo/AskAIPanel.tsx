@@ -120,7 +120,7 @@ export function AskAIPanel() {
               </Bubble>
             ))}
 
-          <Bubble role="user">Summarize {surfaceLabel}</Bubble>
+          <Bubble role="user">Summarize this {surfaceLabel}</Bubble>
 
           <Bubble role="ai">
             {loading ? (
@@ -133,7 +133,7 @@ export function AskAIPanel() {
               <div className="space-y-3">
                 <p className="text-sm leading-relaxed">{TODAYS_INSIGHTS}</p>
                 <p className="text-sm text-muted-foreground">
-                  Here&apos;s the module-wise breakdown:
+                  Here&apos;s the breakdown by module:
                 </p>
                 {MOCK_SUMMARY.slice(0, streamed).map((m) => (
                   <motion.div
