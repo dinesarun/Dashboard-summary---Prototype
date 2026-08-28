@@ -12,9 +12,11 @@ import {
 } from "@/lib/mock-dashboard-ai";
 import { SparkleIcon } from "./SparkleIcon";
 import { TODAYS_INSIGHTS } from "./TodaysInsights";
-import { ArrowRight, Maximize2, RefreshCw, Save, Send } from "lucide-react";
+import { ArrowRight, Copy, Maximize2, RefreshCw, Save, Send } from "lucide-react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
+import { textSummaryToClipboard } from "@/lib/summary-text";
 
 export function AskAIPanel() {
   const {
@@ -55,6 +57,13 @@ export function AskAIPanel() {
   }, [streamed, loading, askPanelOpen]);
 
   const done = !loading && streamed >= MOCK_SUMMARY.length;
+
+  const copySummary = () => {
+    navigator.clipboard.writeText(textSummaryToClipboard()).then(
+      () => toast.success("Summary copied to clipboard"),
+      () => toast.error("Couldn't copy the summary"),
+    );
+  };
 
   const ask = (q: string, customAnswer?: string) => {
     if (!q.trim()) return;
@@ -144,6 +153,18 @@ export function AskAIPanel() {
                 ))}
                 {!done && (
                   <div className="text-xs text-muted-foreground animate-pulse">Generating…</div>
+                )}
+
+                {done && (
+                  <div className="flex justify-end">
+                    <button
+                      type="button"
+                      onClick={copySummary}
+                      className="inline-flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground transition"
+                    >
+                      <Copy className="h-3 w-3" /> Copy summary
+                    </button>
+                  </div>
                 )}
 
                 {/* participative follow-ups at the end of the summary */}

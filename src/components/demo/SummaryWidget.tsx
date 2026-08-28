@@ -21,8 +21,10 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { useNavigate } from "@tanstack/react-router";
+import { toast } from "sonner";
 import { useDemoStore, activeFilterCount } from "@/lib/demo-store";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { textSummaryToClipboard, visualSummaryToClipboard } from "@/lib/summary-text";
 import { MOCK_SUMMARY, VISUAL_SUMMARY, FINAL_INSIGHT, type VisualBar } from "@/lib/mock-summary";
 import { ACTIVE_THREAD_ID } from "@/lib/mock-chats";
 import { SparkleIcon } from "./SparkleIcon";
@@ -36,6 +38,7 @@ import {
   Lock,
   MessageSquare,
   ListFilter,
+  Copy,
 } from "lucide-react";
 
 const barFill: Record<VisualBar["tone"], string> = {
@@ -161,6 +164,16 @@ export function SummaryWidget() {
   const isVisual = settings.granularity === "widget";
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(true);
+
+  const copySummary = () => {
+    const text = isVisual
+      ? visualSummaryToClipboard(settings.title)
+      : textSummaryToClipboard(settings.title);
+    navigator.clipboard.writeText(text).then(
+      () => toast.success("Summary copied to clipboard"),
+      () => toast.error("Couldn't copy the summary"),
+    );
+  };
   const [confirmDelete, setConfirmDelete] = useState(false);
 
   // Keep the "Last updated … ago" subtitle ticking without a manual refresh.
@@ -263,6 +276,15 @@ export function SummaryWidget() {
                   <RefreshCw className={`h-4 w-4 ${isGenerating ? "animate-spin" : ""}`} />
                 </Button>
               )}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8"
+                onClick={copySummary}
+                title="Copy summary"
+              >
+                <Copy className="h-4 w-4" />
+              </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon" className="h-8 w-8">

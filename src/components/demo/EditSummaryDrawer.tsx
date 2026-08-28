@@ -86,7 +86,7 @@ export function EditSummaryDrawer() {
           <div className="space-y-2">
             <Label className="flex items-center gap-1.5">
               <RefreshCw className="h-3.5 w-3.5 text-muted-foreground" />
-              Refresh cadence
+              Refresh frequency
             </Label>
             <Select
               value={local.cadence || undefined}
