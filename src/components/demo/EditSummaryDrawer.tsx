@@ -24,7 +24,7 @@ export function EditSummaryDrawer() {
     if (editDrawerOpen) {
       setLocal({
         ...settings,
-        cadence: settings.cadence || (isReport ? "daily" : "live"),
+        cadence: settings.cadence || "daily",
       });
     }
   }, [editDrawerOpen, settings, isReport]);

@@ -161,7 +161,7 @@ export const useDemoStore = create<State>((set, get) => {
   };
 
   const dashboard = blankSurface();
-  dashboard.settings.cadence = "live"; // dashboards default to live auto-refresh
+  dashboard.settings.cadence = "daily"; // dashboards default to a once-a-day refresh
   const report = blankSurface();
   report.settings.granularity = "page";
   report.settings.title = REPORT_TITLE;
