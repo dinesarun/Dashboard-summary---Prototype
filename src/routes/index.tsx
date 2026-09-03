@@ -10,6 +10,7 @@ import { EditSummaryDrawer } from "@/components/demo/EditSummaryDrawer";
 import { CustomReportingView } from "@/components/demo/CustomReportingView";
 import { TodaysInsights } from "@/components/demo/TodaysInsights";
 import { QuickFiltersBar } from "@/components/demo/DashboardFilters";
+import { SummaryPromptBar } from "@/components/demo/SummaryPromptBar";
 
 import { useDemoStore } from "@/lib/demo-store";
 import { Button } from "@/components/ui/button";
@@ -43,6 +44,8 @@ function Index() {
           <div className="rounded-lg border bg-card/60 px-4 py-2.5">
             <QuickFiltersBar />
           </div>
+
+          <SummaryPromptBar />
 
           <TodaysInsights />
 

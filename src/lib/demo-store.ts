@@ -90,9 +90,11 @@ type State = {
   todaysInsightsEnabled: boolean;
   summaryAiEnabled: boolean;
   refreshFrequencyEnabled: boolean;
+  summaryPromptBarEnabled: boolean;
   setTodaysInsightsEnabled: (v: boolean) => void;
   setSummaryAiEnabled: (v: boolean) => void;
   setRefreshFrequencyEnabled: (v: boolean) => void;
+  setSummaryPromptBarEnabled: (v: boolean) => void;
 
   filters: DashboardFilters;
   setDateRange: (preset: string, from: string, to: string, comparison: string) => void;
@@ -195,6 +197,7 @@ export const useDemoStore = create<State>((set, get) => {
     todaysInsightsEnabled: false,
     summaryAiEnabled: false,
     refreshFrequencyEnabled: false,
+    summaryPromptBarEnabled: true,
     filters: defaultFilters(),
 
     dashboard,
@@ -218,6 +221,7 @@ export const useDemoStore = create<State>((set, get) => {
     setTodaysInsightsEnabled: (v) => set({ todaysInsightsEnabled: v }),
     setSummaryAiEnabled: (v) => set({ summaryAiEnabled: v }),
     setRefreshFrequencyEnabled: (v) => set({ refreshFrequencyEnabled: v }),
+    setSummaryPromptBarEnabled: (v) => set({ summaryPromptBarEnabled: v }),
     closeAskPanel: () => set({ askPanelOpen: false }),
     openAskExpanded: () => set({ askExpandedOpen: true, askPanelOpen: false }),
     closeAskExpanded: () => set({ askExpandedOpen: false }),

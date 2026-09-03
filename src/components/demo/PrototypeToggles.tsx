@@ -11,15 +11,18 @@ export function PrototypeToggles() {
     todaysInsightsEnabled,
     summaryAiEnabled,
     refreshFrequencyEnabled,
+    summaryPromptBarEnabled,
     setTodaysInsightsEnabled,
     setSummaryAiEnabled,
     setRefreshFrequencyEnabled,
+    setSummaryPromptBarEnabled,
   } = useDemoStore();
 
   const activeCount =
     (todaysInsightsEnabled ? 1 : 0) +
     (summaryAiEnabled ? 1 : 0) +
-    (refreshFrequencyEnabled ? 1 : 0);
+    (refreshFrequencyEnabled ? 1 : 0) +
+    (summaryPromptBarEnabled ? 1 : 0);
 
   return (
     <Popover>
@@ -84,6 +87,20 @@ export function PrototypeToggles() {
               <span className="block text-sm font-medium">Refresh frequency</span>
               <span className="block text-[11px] text-muted-foreground">
                 The refresh frequency field in Customize summary.
+              </span>
+            </span>
+          </label>
+
+          <label className="flex cursor-pointer items-start gap-2.5">
+            <Checkbox
+              checked={summaryPromptBarEnabled}
+              onCheckedChange={(v) => setSummaryPromptBarEnabled(v === true)}
+              className="mt-0.5"
+            />
+            <span>
+              <span className="block text-sm font-medium">Summary prompt bar</span>
+              <span className="block text-[11px] text-muted-foreground">
+                A trigger bar below Quick Filters that prompts an AI summary.
               </span>
             </span>
           </label>
