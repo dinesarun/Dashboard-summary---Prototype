@@ -16,7 +16,14 @@ import { toast } from "sonner";
 import { FileText, RefreshCw, Sparkles, Type } from "lucide-react";
 
 export function EditSummaryDrawer() {
-  const { editDrawerOpen, closeEditDrawer, settings, updateSettings, view } = useDemoStore();
+  const {
+    editDrawerOpen,
+    closeEditDrawer,
+    settings,
+    updateSettings,
+    view,
+    refreshFrequencyEnabled,
+  } = useDemoStore();
   const isReport = view === "report";
   const [local, setLocal] = useState(settings);
 
@@ -83,37 +90,41 @@ export function EditSummaryDrawer() {
             </p>
           </div>
 
-          <div className="space-y-2">
-            <Label className="flex items-center gap-1.5">
-              <RefreshCw className="h-3.5 w-3.5 text-muted-foreground" />
-              Refresh frequency
-            </Label>
-            <Select
-              value={local.cadence || undefined}
-              onValueChange={(v) => setLocal({ ...local, cadence: v as Cadence })}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select cadence" />
-              </SelectTrigger>
-              <SelectContent>
-                {isReport ? (
-                  <>
-                    <SelectItem value="daily">Daily</SelectItem>
-                    <SelectItem value="weekly">Weekly</SelectItem>
-                    <SelectItem value="monthly">Monthly</SelectItem>
-                    <SelectItem value="quarterly">Quarterly</SelectItem>
-                    <SelectItem value="yearly">Yearly</SelectItem>
-                  </>
-                ) : (
-                  <>
-                    <SelectItem value="live">Live — updates as and when filters change</SelectItem>
-                    <SelectItem value="daily">Once in a day</SelectItem>
-                    <SelectItem value="weekly">Once in a week</SelectItem>
-                  </>
-                )}
-              </SelectContent>
-            </Select>
-          </div>
+          {refreshFrequencyEnabled && (
+            <div className="space-y-2">
+              <Label className="flex items-center gap-1.5">
+                <RefreshCw className="h-3.5 w-3.5 text-muted-foreground" />
+                Refresh frequency
+              </Label>
+              <Select
+                value={local.cadence || undefined}
+                onValueChange={(v) => setLocal({ ...local, cadence: v as Cadence })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select cadence" />
+                </SelectTrigger>
+                <SelectContent>
+                  {isReport ? (
+                    <>
+                      <SelectItem value="daily">Daily</SelectItem>
+                      <SelectItem value="weekly">Weekly</SelectItem>
+                      <SelectItem value="monthly">Monthly</SelectItem>
+                      <SelectItem value="quarterly">Quarterly</SelectItem>
+                      <SelectItem value="yearly">Yearly</SelectItem>
+                    </>
+                  ) : (
+                    <>
+                      <SelectItem value="live">
+                        Live — updates as and when filters change
+                      </SelectItem>
+                      <SelectItem value="daily">Once in a day</SelectItem>
+                      <SelectItem value="weekly">Once in a week</SelectItem>
+                    </>
+                  )}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
 
           <div className="space-y-2">
             <Label className="flex items-center gap-1.5">

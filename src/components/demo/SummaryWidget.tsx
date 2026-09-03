@@ -159,6 +159,7 @@ export function SummaryWidget() {
     resetSettings,
     lastUpdated,
     settings,
+    todaysInsightsEnabled,
   } = useDemoStore();
   const isVisual = settings.granularity === "widget";
   const navigate = useNavigate();
@@ -368,14 +369,16 @@ export function SummaryWidget() {
                 isGenerating ? "pointer-events-none opacity-40" : ""
               }`}
             >
-              <div className="rounded-lg border bg-[color:var(--ai-accent)]/5 p-3 mb-1">
-                <p className="text-sm leading-relaxed">
-                  <span className="font-semibold text-[color:var(--ai-accent)]">
-                    Today's insights:{" "}
-                  </span>
-                  {TODAYS_INSIGHTS}
-                </p>
-              </div>
+              {todaysInsightsEnabled && (
+                <div className="rounded-lg border bg-[color:var(--ai-accent)]/5 p-3 mb-1">
+                  <p className="text-sm leading-relaxed">
+                    <span className="font-semibold text-[color:var(--ai-accent)]">
+                      Today's insights:{" "}
+                    </span>
+                    {TODAYS_INSIGHTS}
+                  </p>
+                </div>
+              )}
               {isVisual ? (
                 <>
                   <div className="grid gap-4 sm:grid-cols-2">
@@ -407,22 +410,15 @@ export function SummaryWidget() {
                   )}
                 </>
               ) : (
-                <div className="space-y-1.5 text-sm text-muted-foreground">
-                  {(expanded ? MOCK_SUMMARY : MOCK_SUMMARY.slice(0, 2)).flatMap((m) =>
-                    m.bullets.map((b, i) => (
-                      <div key={`${m.key}-${i}`} className="flex gap-2 leading-relaxed">
-                        <span className="w-4 shrink-0 select-none text-center">
-                          {i === 0 ? m.emoji : "•"}
-                        </span>
-                        <span>
-                          {i === 0 && (
-                            <span className="font-semibold text-foreground">{m.label}: </span>
-                          )}
-                          {b}
-                        </span>
-                      </div>
-                    )),
-                  )}
+                <div className="space-y-2.5 text-sm text-muted-foreground">
+                  {(expanded ? MOCK_SUMMARY : MOCK_SUMMARY.slice(0, 2)).map((m) => (
+                    <p key={m.key} className="leading-relaxed">
+                      <span className="font-semibold text-foreground">
+                        {m.emoji} {m.label}:{" "}
+                      </span>
+                      {m.bullets.join(" ")}
+                    </p>
+                  ))}
                 </div>
               )}
             </div>

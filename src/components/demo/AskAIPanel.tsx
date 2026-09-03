@@ -28,6 +28,7 @@ export function AskAIPanel() {
     view,
     askSeed,
     clearAskSeed,
+    todaysInsightsEnabled,
   } = useDemoStore();
   const surfaceLabel = view === "report" ? "report" : "dashboard";
   const [streamed, setStreamed] = useState(0);
@@ -131,7 +132,14 @@ export function AskAIPanel() {
               </div>
             ) : (
               <div className="space-y-3">
-                <p className="text-sm leading-relaxed">{TODAYS_INSIGHTS}</p>
+                {todaysInsightsEnabled && (
+                  <p className="text-sm leading-relaxed">
+                    <span className="font-semibold text-[color:var(--ai-accent)]">
+                      Today&apos;s insights:{" "}
+                    </span>
+                    {TODAYS_INSIGHTS}
+                  </p>
+                )}
                 <p className="text-sm text-muted-foreground">
                   Here&apos;s the breakdown by module:
                 </p>

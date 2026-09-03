@@ -1,12 +1,14 @@
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { useDemoStore } from "@/lib/demo-store";
 import { SparkleIcon } from "./SparkleIcon";
 import { ViewSwitcher } from "./ViewSwitcher";
 import { DateRangeFilter } from "./DashboardFilters";
+import { PrototypeToggles } from "./PrototypeToggles";
 import { Pencil, X } from "lucide-react";
 
 export function DashboardHeader() {
-  const { editMode, setEditMode, view, openAskPanel } = useDemoStore();
+  const { editMode, setEditMode, view, openAskPanel, summaryAiEnabled } = useDemoStore();
   const isReport = view === "report";
 
   return (
@@ -20,6 +22,8 @@ export function DashboardHeader() {
         </div>
 
         <div className="flex items-center gap-2">
+          <PrototypeToggles />
+
           {!isReport && <DateRangeFilter />}
 
           <Button
@@ -32,6 +36,14 @@ export function DashboardHeader() {
           >
             <SparkleIcon className="!h-4 !w-4" />
           </Button>
+
+          {summaryAiEnabled && (
+            <Button asChild size="sm" variant="outline" className="gap-1.5">
+              <Link to="/dashboard-ai">
+                <SparkleIcon className="!h-4 !w-4" /> Summary AI
+              </Link>
+            </Button>
+          )}
 
           <div className="mx-2 h-6 w-px bg-border" />
 

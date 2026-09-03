@@ -8,9 +8,10 @@ export const TODAYS_INSIGHTS =
   "32 new opportunities came in today (+18% vs. yesterday) with $148K sitting in Proposal — 6 deals have stalled over 7 days. Your no-show rate climbed to 25.5%, mostly from this morning's appointment block.";
 
 export function TodaysInsights() {
-  const { openAskPanel, insightsDismissed, dismissInsights, widgetExists } = useDemoStore();
+  const { openAskPanel, insightsDismissed, dismissInsights, widgetExists, todaysInsightsEnabled } =
+    useDemoStore();
 
-  if (insightsDismissed || widgetExists) return null;
+  if (!todaysInsightsEnabled || insightsDismissed || widgetExists) return null;
 
   return (
     <motion.section

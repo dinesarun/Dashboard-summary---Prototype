@@ -86,6 +86,14 @@ type State = {
   openAskWithSeed: (seed: string) => void;
   clearAskSeed: () => void;
 
+  // Prototype feature toggles — off by default; enable to preview deferred concepts.
+  todaysInsightsEnabled: boolean;
+  summaryAiEnabled: boolean;
+  refreshFrequencyEnabled: boolean;
+  setTodaysInsightsEnabled: (v: boolean) => void;
+  setSummaryAiEnabled: (v: boolean) => void;
+  setRefreshFrequencyEnabled: (v: boolean) => void;
+
   filters: DashboardFilters;
   setDateRange: (preset: string, from: string, to: string, comparison: string) => void;
   setQuickFilter: (key: QuickFilterKey, value: string | null) => void;
@@ -176,6 +184,9 @@ export const useDemoStore = create<State>((set, get) => {
     editDrawerOpen: false,
     insightsDismissed: readDismissed(),
     askSeed: null,
+    todaysInsightsEnabled: false,
+    summaryAiEnabled: false,
+    refreshFrequencyEnabled: false,
     filters: defaultFilters(),
 
     dashboard,
@@ -196,6 +207,9 @@ export const useDemoStore = create<State>((set, get) => {
     openAskPanel: () => set({ askPanelOpen: true, askSeed: null }),
     openAskWithSeed: (seed) => set({ askPanelOpen: true, askSeed: seed }),
     clearAskSeed: () => set({ askSeed: null }),
+    setTodaysInsightsEnabled: (v) => set({ todaysInsightsEnabled: v }),
+    setSummaryAiEnabled: (v) => set({ summaryAiEnabled: v }),
+    setRefreshFrequencyEnabled: (v) => set({ refreshFrequencyEnabled: v }),
     closeAskPanel: () => set({ askPanelOpen: false }),
     openAskExpanded: () => set({ askExpandedOpen: true, askPanelOpen: false }),
     closeAskExpanded: () => set({ askExpandedOpen: false }),
