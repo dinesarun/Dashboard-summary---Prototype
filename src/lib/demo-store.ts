@@ -127,8 +127,16 @@ type State = {
   resetSettings: () => void;
 };
 
-const DEFAULT_INSTRUCTIONS =
+export const DEFAULT_INSTRUCTIONS =
   "Summarize the key trends and notable changes across modules. Call out anomalies, big movers, and anything that needs attention. Keep bullets concise and action-oriented.";
+
+// System-default settings for a surface — used to reset fields in the drawer.
+export const defaultSettings = (isReport: boolean): Settings => ({
+  title: isReport ? REPORT_TITLE : DASHBOARD_TITLE,
+  granularity: isReport ? "page" : "module",
+  cadence: isReport ? "" : "daily",
+  instructions: DEFAULT_INSTRUCTIONS,
+});
 
 const blankSurface = (): Surface => ({
   exists: false,

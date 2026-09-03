@@ -1,5 +1,5 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { useDemoStore, type Cadence, type Granularity } from "@/lib/demo-store";
+import { useDemoStore, defaultSettings, type Cadence, type Granularity } from "@/lib/demo-store";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { FileText, RefreshCw, Sparkles, Type } from "lucide-react";
+import { FileText, RefreshCw, RotateCcw, Sparkles, Type } from "lucide-react";
 
 export function EditSummaryDrawer() {
   const {
@@ -35,6 +35,18 @@ export function EditSummaryDrawer() {
       });
     }
   }, [editDrawerOpen, settings, isReport]);
+
+  // Revert Title, Summary style and Instructions to system defaults — local only,
+  // not applied until the user clicks "Apply changes". Cadence is left untouched.
+  const resetToDefaults = () => {
+    const d = defaultSettings(isReport);
+    setLocal((prev) => ({
+      ...prev,
+      title: d.title,
+      granularity: d.granularity,
+      instructions: d.instructions,
+    }));
+  };
 
   return (
     <Sheet open={editDrawerOpen} onOpenChange={(o) => !o && closeEditDrawer()}>
@@ -142,19 +154,29 @@ export function EditSummaryDrawer() {
             </p>
           </div>
 
-          <div className="flex justify-end gap-2 pt-2">
-            <Button variant="outline" onClick={closeEditDrawer}>
-              Cancel
-            </Button>
+          <div className="flex items-center justify-between pt-2">
             <Button
-              onClick={() => {
-                updateSettings(local);
-                closeEditDrawer();
-                toast.success("Summary updated");
-              }}
+              variant="ghost"
+              size="sm"
+              className="gap-1.5 text-muted-foreground"
+              onClick={resetToDefaults}
             >
-              Apply changes
+              <RotateCcw className="h-4 w-4" /> Reset to defaults
             </Button>
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={closeEditDrawer}>
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  updateSettings(local);
+                  closeEditDrawer();
+                  toast.success("Summary updated");
+                }}
+              >
+                Apply changes
+              </Button>
+            </div>
           </div>
         </div>
       </SheetContent>

@@ -31,7 +31,6 @@ import { TODAYS_INSIGHTS } from "./TodaysInsights";
 import {
   MoreHorizontal,
   RefreshCw,
-  RotateCcw,
   Pencil,
   Trash2,
   Lock,
@@ -156,7 +155,6 @@ export function SummaryWidget() {
     openAskPanel,
     openAskWithSeed,
     highlightWidget,
-    resetSettings,
     lastUpdated,
     settings,
     todaysInsightsEnabled,
@@ -294,9 +292,6 @@ export function SummaryWidget() {
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem onClick={openEditDrawer}>
                     <Pencil className="h-4 w-4 mr-2" /> Customize summary
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={resetSettings}>
-                    <RotateCcw className="h-4 w-4 mr-2" /> Reset to defaults
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() =>

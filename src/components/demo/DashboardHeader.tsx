@@ -30,11 +30,11 @@ export function DashboardHeader() {
             size="sm"
             variant="outline"
             onClick={openAskPanel}
-            className="h-8 w-8 px-0"
-            aria-label="Ask AI"
-            title="Ask AI"
+            className="gap-1.5"
+            aria-label="Dashboard summary"
+            title="Dashboard summary"
           >
-            <SparkleIcon className="!h-4 !w-4" />
+            <SparkleIcon className="!h-4 !w-4" /> Dashboard summary
           </Button>
 
           {summaryAiEnabled && (
